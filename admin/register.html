@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Parcel Sandbox</title>
+    <meta charset="UTF-8" />
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+  </head>
+  
+  <body>
+    <div>
+      <div id="app" style="width: 100%;">
+        <i class="fas fa-cat" style="font-size: 48px; position: absolute;"></i>
+      </div>
+    </div>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="src/index.js"></script>
+    <script>
+      console.log("hi", window.innerHeight);
+      window.onload = () => {
+        var divx = document.getElementsByClassName("fas")[0];
+        console.log(divx);
+        divx.addEventListener("click", function (e) {
+          divx.style.color = "green"
+          divx.style.top = `${Math.floor(Math.random() * 1000)}px`;
+          divx.style.left = `${Math.floor(Math.random() * 1000)}px`;
+          
+        });
+        setTimeout(()=>foo(),5000)
+        function foo () {
+        divx.addEventListener("mouseout", function (e) {
+          divx.style.color = "black"
+         
+        });
+      }
+      };
+    </script>
+  </body>
+</html>
