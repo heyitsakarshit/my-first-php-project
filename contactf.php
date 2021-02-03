@@ -1,6 +1,34 @@
 <?php 
     $connect = mysqli_connect("localhost","drakpandey","Pandey@809","akpandey");
-    if(isset($_POST["subscriber"]))
+   
+    if(isset($_POST["appointment"]))
+    {
+        if(empty($_POST["name"]) && empty($_POST["email"]))
+        {
+            echo '<script>alert("All Field are required to filled")</script>';
+        }
+
+        else
+        {
+            $name=mysqli_real_escape_string($connect,$_POST["name"]);
+            $email=mysqli_real_escape_string($connect,$_POST["email"]);
+            $phone=mysqli_real_escape_string($connect,$_POST["phone"]);
+            $treatment=mysqli_real_escape_string($connect,$_POST["treatment"]);
+            $msg=mysqli_real_escape_string($connect,$_POST["msg"]);
+            $date=mysqli_real_escape_string($connect,$_POST["date"]);
+
+            $query="INSERT INTO appointments (name,email,phone,treatment,msg,app_date) VALUES('$name','$email','$phone','$treatment','$msg','$date')";
+            
+            if(mysqli_query($connect, $query))
+            {
+                echo '<script>alert("Appointment Book Successfully")</script>';
+                  header('location:index.php');
+          
+            exit;
+            }
+        }
+    }
+   else if(isset($_POST["subscriber"]))
     {
      
             $email=mysqli_real_escape_string($connect,$_POST["email"]);
@@ -8,7 +36,7 @@
              if(mysqli_query($connect, $query))
             {
                 echo '<script>alert("Subscribed Successfully")</script>';
-            header('location:services.php');
+            header('location:index.php');
           
             exit;
             }
@@ -17,32 +45,28 @@
     
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 
-<meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
-
 <head>
-    <title>Treatment</title>
+    <title>A.k Pandey</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Dr. AK Pandey template project">
+    <meta name="description" content="A.k Pandya template project">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="styles/bootstrap-4.1.2/bootstrap.min.css">
     <link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
     <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
     <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css">
-    <link rel="stylesheet" type="text/css" href="plugins/image-comparison-slider-master/style.css">
-    <link rel="stylesheet" type="text/css" href="styles/services.css">
-    <link rel="stylesheet" type="text/css" href="styles/services_responsive.css">
+    <link href="plugins/jquery-datepicker/jquery-ui.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="styles/main_styles.css">
+    <link rel="stylesheet" type="text/css" href="styles/responsive.css">
     <link rel="icon" href="images/b.png" type="image" sizes="16x16">
 </head>
 
 <body>
-    
- 
-    
     <div class="super_container">
 
         <header class="header trans_400">
@@ -57,9 +81,9 @@
 
                 <nav class="main_nav">
                     <ul class="d-flex flex-row align-items-center justify-content-start">
-                        <li><a href="index.php">Home</a></li>
+                        <li class="active"><a href="index.php">Home</a></li>
                         <li><a href="about.php">About us</a></li>
-                        <li class="nav-item dropdown active">
+                        <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Treatment
         </a>
@@ -73,7 +97,7 @@
                                while($row = mysqli_fetch_array($result))  
                                {  
                           ?> 
-                                 <a class="dropdown-item" href="details.php?id=<?php echo $row["id"];?>"><?php echo $row["name"]; ?></a>
+                                <a class="dropdown-item" href="details.php?id=<?php echo $row["id"];?>"><?php echo $row["name"]; ?></a>
                                <?php  
                                }  
                           }  
@@ -87,9 +111,9 @@
                 </nav>
                 <div class="header_extra d-flex flex-row align-items-center justify-content-end ml-auto">
 
-                 
+                    
 
-                    <div class="button button_1 header_button"><a href="contactf.php">Make an Appointment</a></div>
+                    <div class="button button_1 header_button"><a href="#appointment">Make an Appointment</a></div>
 
                     <div class="social header_social">
                         <ul class="d-flex flex-row align-items-center justify-content-start">
@@ -139,7 +163,7 @@
       </li>
                     <li><a href="contact.php">Contact</a></li>
                     <li><a href="gallery.php">Gallery</a></li>
-                    <li><a href="contactf.php">Make an appointment</a></li>
+                     <li><a href="contactf.php">Make an appointment</a></li>
                 </ul>
             </nav>
             <div class="menu_extra">
@@ -148,88 +172,112 @@
             </div>
             <div class="social menu_social">
                 <ul class="d-flex flex-row align-items-center justify-content-start">
-                    <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-instagram"aria-hidden="true" ></i></a></li>
                     <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                     <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
                     <li><a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
                 </ul>
             </div>
         </div>
+        
+        
 
-        <div class="home d-flex flex-column align-items-start justify-content-end">
-            <div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="images/services.jpg" data-speed="0.8"></div>
-            <div class="home_overlay"><img src="images/home_overlay.png" alt=""></div>
-            <div class="home_container">
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
-                            <div class="home_content">
-                                <div class="home_title">Treatment</div>
-                                <div class="home_text"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="services">
+        <div class="intro" style="padding-top:155px;">
             <div class="container">
                 <div class="row">
-                    <div class="col text-center">
-                        <div class="section_title_container">
-                            <div class="section_subtitle">This is Dr. A.K. Pandey</div>
-                            <div class="section_title">
-                                <h2>Our Treatment</h2>
+
+                   
+
+                   <div class="col-lg-6 intro_col"  id="appointment">
+                        <div class="intro_form_container">
+                            <div class="intro_form_title">Make an Appointment</div>
+                            <form action="index.php" class="intro_form" name="appointment" id="intro_form" method="post">
+                              
+                                <div class="d-flex flex-row align-items-start justify-content-between flex-wrap">
+                                     <input type="text" id="colFormLabel"name="name" class="intro_input"  title="Follow (/^[A-Za-z]+$/) Formit " placeholder="Your Name" minlength="3" required="">
+
+                                    <input type="email" class="intro_input" name="email" id="email" placeholder="Your E-mail" required>
+
+                                     <input id="mobile" name="phone" type="number" placeholder="Phone"class="intro_input" required=""  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"type = "number"maxlength = "10"/>
+                                    
+                                    <select class="intro_select intro_input" id="treatment" name="treatment" required>
+                                    <option disabled="" selected="" value="">Treatment</option>
+                                    
+                                            <?php   $connect = mysqli_connect("localhost","drakpandey","Pandey@809","akpandey");   
+                                                $query = "SELECT * FROM services ORDER BY id ASC";  
+                                                $result = mysqli_query($connect, $query);    
+                                                if(mysqli_num_rows($result) > 0)  
+                                                          {  
+                                                               while($row = mysqli_fetch_array($result))  
+                                                               {  
+                                                          ?> 
+                                                                
+                                                                <option><?php echo $row["name"]; ?></option> 
+                                            <?php  
+                                                   }  
+                                              }  
+                                              ?>
+
+                                            </select>
+                                            
+                                    
+                                    <input type="date"  name="date" class="intro_input" placeholder="Date" required"" style="color: #a6a6a5;">
+                                    <textarea rows="4" cols="50" class="intro_input" id="msg" name="msg" placeholder="Your Message" required style="padding: 7px 8px 5px 7px;"></textarea>
+
+                                </div>
+                                <button type="submit" name="appointment" id="appointment" class="button button_1 intro_button trans_200">make an appointment</button>
+                            </form>
+                        </div>
+                    </div>
+                    
+                     <div class="col-lg-6 intro_col">
+                        <div class="intro_content">
+                            <div class="section_title_container">
+                                <div class="section_subtitle">This is A.k. Pandey</div>
+                                <div class="section_title">
+                                    <h2>Welcome to our Clinic</h2>
+                                </div>
+                            </div>
+                            <div class="intro_text">
+                                <p><b>Homeopathy</b> is natural, efficient, logical, completely safe way to cure any diseases. Homeopathy medicines play a vital role to cure any disease permanently from its roots. Homeopathy is the very simple and efficient way to treats the patient by stimulating the immune system of the patient. Homeopathic medicines are potentized medicines that are enough to stimulate the immune system to fight the diseased condition without leaving any side effect. 
+Homeopathy works well on complete case taking of patient also need totality of symptoms. Homeopathic medicines work well on all age groups, especially infants, children, and elderlies. Prepared by the process of potentisation, which eliminates the toxic effect of the crude drug, homeopathic medicines do not leave any side effects.
+Homeopathic doctor considers the treatment of patient not of the disease, homeopathy says that the reason behind every illness is the imbalance in the vital force, which is caused by the noxious effect of different types of viruses, bacteria’s, etc. This balance of vital force keeps the body in a healthy state, which helps an individual to enjoy every sphere of life.
+</p>
+                            </div>
+                            <div class="milestones">
+                                <div class="row milestones_row">
+
+                                    <div class="col-md-4 milestone_col">
+                                        <div class="milestone">
+                                            <div class="milestone_counter" data-end-value="5000" data-sign-before="+">0</div>
+                                            <div class="milestone_text">Satisfied Patients</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4 milestone_col">
+                                        <div class="milestone">
+                                            <div class="milestone_counter" data-end-value="352">0</div>
+                                            <div class="milestone_text">Face Liftings</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4 milestone_col">
+                                        <div class="milestone">
+                                            <div class="milestone_counter" data-end-value="718">0</div>
+                                            <div class="milestone_text">Injectibles</div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row services_row">
-                    <?php   $connect = mysqli_connect("localhost","drakpandey","Pandey@809","akpandey");   
-                                        $query = "SELECT * FROM services ORDER BY id ASC";  
-                                        $result = mysqli_query($connect, $query);    
-                                        if(mysqli_num_rows($result) > 0)  
-                                                  {  
-                                                       while($row = mysqli_fetch_array($result))  
-                                                       {  
-                                                  ?> 
-                      <div class="col-xl-4 col-md-6 service_col">
-                        <div class="service text-center">
-                            <a href="details.php?id=<?php echo $row["id"];?>">
-                                <div class="service">
-                                     <div class="icon_container d-flex flex-column align-items-center justify-content-center ml-auto mr-auto">
-                                        <div class="icon"><img src="images/icon_4.svg" alt="https://www.flaticon.com/authors/prosymbols"></div>
-                                     </div>         
-                                        <div class="service_title"><?php echo $row["name"]; ?></div>
-                                        <div class="service_text">
-                                            <p style="padding-bottom:5px;"><?php echo substr($row["description"],0,115);?>...</p>
-                                            <div class="service_details">
-                                        </div>
-                                       <a href="details.php?id=<?php echo $row["id"];?>"> 
-                                        <button type="button" class="btn btn-success" style="background-color: #1e824c;">View More</button></a>
-                                        <!--<a href="details.php"><button type="button" class="btn btn-success" style="background-color: #1e824c;">View More</button></a>-->
-                                         
-                                            </div>
-                                </div>
-                                </a>
-                        </div>
-                    </div>
-                               <?php  
-                               }  
-                          }  
-                          ?>
-                </div>
             </div>
         </div>
 
+        
 
-
-
-
-
-        <div class="newsletter">
-            <div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="images/newsletter.jpg" data-speed="0.8"></div>
+        <div class="newsletter sub-image">
             <div class="container">
                 <div class="row">
                     <div class="col text-center">
@@ -239,9 +287,9 @@
                 <div class="row newsletter_row">
                     <div class="col-lg-8 offset-lg-2">
                         <div class="newsletter_form_container">
-                            <form action="" method="post" name="subscriber" id="newsleter_form" class="newsletter_form">
+                            <form  method="post" name="subscriber" id="newsleter_form" action="" class="newsletter_form">
                                 <input type="email" name="email" class="newsletter_input" placeholder="Your E-mail" required>
-                                <button type="submit" class="newsletter_button" name="subscriber">subscribe</button>
+                                <button type="submit" class="newsletter_button" name="subscriber">Subscribe</button>
                             </form>
                         </div>
                     </div>
@@ -253,7 +301,7 @@
                 <div class="container">
                     <div class="row">
 
-                      <div class="col-lg-3 footer_col">
+                        <div class="col-lg-3 footer_col">
                             <div class="footer_about">
                                 <div class="footer_logo">
                                     <a href="#">
@@ -271,7 +319,6 @@
                                 </div>
                             </div>
                         </div>
-
 
                         <div class="col-lg-3 footer_col">
                             <div class="footer_contact">
@@ -339,7 +386,7 @@
                                     <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
                                     <script type="68ed49aa95a58c80cbae0012-text/javascript">
                                         document.write(new Date().getFullYear());
-                                    </script> All rights reserved <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="#"> Dr. A.K. Pandey</a>
+                                    </script> All rights reserved <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="#" target="_blank"> Dr. A.K. Pandey</a>
                                 </div>
                                 <nav class="footer_nav ml-md-auto">
                                     <ul class="d-flex flex-row align-items-center justify-content-start">
@@ -355,12 +402,6 @@
             </div>
         </footer>
     </div>
-    
-    
- 
-    
-    
-    
     <script src="js/jquery-3.2.1.min.js" type="68ed49aa95a58c80cbae0012-text/javascript"></script>
     <script src="styles/bootstrap-4.1.2/popper.js" type="68ed49aa95a58c80cbae0012-text/javascript"></script>
     <script src="styles/bootstrap-4.1.2/bootstrap.min.js" type="68ed49aa95a58c80cbae0012-text/javascript"></script>
@@ -373,7 +414,7 @@
     <script src="plugins/easing/easing.js" type="68ed49aa95a58c80cbae0012-text/javascript"></script>
     <script src="plugins/parallax-js-master/parallax.min.js" type="68ed49aa95a58c80cbae0012-text/javascript"></script>
     <script src="plugins/jquery-datepicker/jquery-ui.js" type="68ed49aa95a58c80cbae0012-text/javascript"></script>
-    <script src="js/services.js" type="68ed49aa95a58c80cbae0012-text/javascript"></script>
+    <script src="js/custom.js" type="68ed49aa95a58c80cbae0012-text/javascript"></script>
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13" type="68ed49aa95a58c80cbae0012-text/javascript"></script>
     <script type="68ed49aa95a58c80cbae0012-text/javascript">

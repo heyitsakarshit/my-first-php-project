@@ -113,7 +113,7 @@
 
                     
 
-                    <div class="button button_1 header_button"><a href="contact.php">Make an Appointment</a></div>
+                    <div class="button button_1 header_button"><a href="#appointment">Make an Appointment</a></div>
 
                     <div class="social header_social">
                         <ul class="d-flex flex-row align-items-center justify-content-start">
@@ -163,12 +163,12 @@
       </li>
                     <li><a href="contact.php">Contact</a></li>
                     <li><a href="gallery.php">Gallery</a></li>
+                    <li><a href="contactf.php">Make an appointment</a></li>
                 </ul>
             </nav>
             <div class="menu_extra">
                 <div class="menu_link">Mo - Sat: 8:00am - 9:00pm</div>
                 <div class="menu_link">+91 8354808215</div>
-                <div class="menu_link"><a href="contact.php">Make an appointment</a></div>
             </div>
             <div class="social menu_social">
                 <ul class="d-flex flex-row align-items-center justify-content-start">
@@ -199,7 +199,7 @@
                                             </div>
                                             <div class="home_buttons d-flex flex-row align-items-center justify-content-start">
                                                 <div class="button button_1 trans_200"><a href="#">read more</a></div>
-                                                <div class="button button_2 trans_200"><a href="contact.php">make an appointment</a></div>
+                                                <div class="button button_2 trans_200"><a href="#appointment">make an appointment</a></div>
                                             </div>
                                         </div>
                                     </div>
@@ -222,7 +222,7 @@
                                             </div>
                                             <div class="home_buttons d-flex flex-row align-items-center justify-content-start">
                                                 <div class="button button_1 trans_200"><a href="#">read more</a></div>
-                                                <div class="button button_2 trans_200"><a href="contact.php">make an appointment</a></div>
+                                                <div class="button button_2 trans_200"><a href="#appointment">make an appointment</a></div>
                                             </div>
                                         </div>
                                     </div>
@@ -245,7 +245,7 @@
                                             </div>
                                             <div class="home_buttons d-flex flex-row align-items-center justify-content-start">
                                                 <div class="button button_1 trans_200"><a href="#">read more</a></div>
-                                                <div class="button button_2 trans_200"><a href="contact.php">make an appointment</a></div>
+                                                <div class="button button_2 trans_200"><a href="#appointment">make an appointment</a></div>
                                             </div>
                                         </div>
                                     </div>
@@ -311,7 +311,7 @@ Homeopathic doctor considers the treatment of patient not of the disease, homeop
                         </div>
                     </div>
 
-                   <div class="col-lg-6 intro_col">
+                   <div class="col-lg-6 intro_col"  id="appointment">
                         <div class="intro_form_container">
                             <div class="intro_form_title">Make an Appointment</div>
                             <form action="index.php" class="intro_form" name="appointment" id="intro_form" method="post">
@@ -705,7 +705,6 @@ Homeopathic doctor considers the treatment of patient not of the disease, homeop
                                     <ul class="d-flex flex-row align-items-center justify-content-start">
                                         <li><a href="index.php">Home</a></li>
                                         <li><a href="about.php">About us</a></li>
-                                        <li><a href="services.php">Services</a></li>
                                         <li><a href="contact.php">Contact</a></li>
                                     </ul>
                                 </nav>

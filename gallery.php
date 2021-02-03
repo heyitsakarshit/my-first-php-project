@@ -101,7 +101,7 @@
                 <div class="header_extra d-flex flex-row align-items-center justify-content-end ml-auto">
 
                    
-                    <div class="button button_1 header_button"><a href="contact.php">Make an Appointment</a></div>
+                    <div class="button button_1 header_button"><a href="contactf.php">Make an Appointment</a></div>
 
                     <div class="social header_social">
                         <ul class="d-flex flex-row align-items-center justify-content-start">
@@ -153,12 +153,12 @@
       </li>
                     <li><a href="contact.php">Contact</a></li>
                     <li><a href="gallery.php">Gallery</a></li>
+                    <li><a href="contactf.php">Make an appointment</a></li>
                 </ul>
             </nav>
             <div class="menu_extra">
                 <div class="menu_link">Mo - Sat: 8:00am - 9:00pm</div>
                 <div class="menu_link">+91 8354808215</div>
-                <div class="menu_link"><a href="contact.php">Make an appointment</a></div>
             </div>
             <div class="social menu_social">
                 <ul class="d-flex flex-row align-items-center justify-content-start">
@@ -352,7 +352,6 @@
                                     <ul class="d-flex flex-row align-items-center justify-content-start">
                                         <li><a href="index.php">Home</a></li>
                                         <li><a href="about.php">About us</a></li>
-                                        <li><a href="services.php">treatment</a></li>
                                         <li><a href="contact.php">Contact</a></li>
                                     </ul>
                                 </nav>
